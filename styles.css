@@ -94,6 +94,10 @@ li {
     display: none;
 }
 
+#save {
+    display: none;
+}
+
 #sum {
     margin-left: 10px;
 }
@@ -101,3 +105,4 @@ li {
 #cuccok {
     padding: 0;
 }
+
