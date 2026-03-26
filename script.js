@@ -3,7 +3,6 @@ const sum = document.getElementById("sum");          //Össz-ár címkéje
 const count = document.getElementById("count");      //Kiszámoló gomb
 const buy = document.getElementById("buy");          //Vásárlás véglegesítése
 const save = document.getElementById("save");        //Adatok mentése
-let IP;
 let vetel = {cuccok: [], összeg: 0};                                           //Egy vásárlás részletei
 
 //Árukészlet két adattáblában
@@ -11,8 +10,9 @@ let készlet;
 
 //IP cím beszerzése
 function GetIP() {
-    IP = prompt('Add meg az IP címet!');
+    return prompt('Add meg az IP címet!');
 }
+const IP = GetIP()
 
 //Adatok letöltése a szerverről
 function GetData() {
@@ -140,7 +140,6 @@ function buy_products() {
     }
 }
 
-GetIP();
 GetData();
 
 count.addEventListener("click", () => { add_prices() });
