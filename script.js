@@ -84,6 +84,9 @@ function add_prices() {
         if (inp === null) {
             continue;
         }
+        if (inp.value == "") {
+	    inp.value = 0;
+        }
         if (készlet.megmaradt[i - 1][2] >= inp.valueAsNumber && inp.valueAsNumber >= 0) {
             reszosszeg = inp.valueAsNumber * készlet.megmaradt[i - 1][1];
             minden += reszosszeg;
