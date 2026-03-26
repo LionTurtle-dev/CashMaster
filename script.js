@@ -3,7 +3,7 @@ const sum = document.getElementById("sum");          //Össz-ár címkéje
 const count = document.getElementById("count");      //Kiszámoló gomb
 const buy = document.getElementById("buy");          //Vásárlás véglegesítése
 const save = document.getElementById("save");        //Adatok mentése
-let vetel = { cuccok: [], összeg: 0 };                                           //Egy vásárlás részletei
+let vetel = {cuccok: [], összeg: 0};                 //Egy vásárlás részletei
 
 //Árukészlet két adattáblában
 let készlet;
@@ -26,16 +26,15 @@ function GetData() {
             load();
         })
         .catch(() => {
-            // Sikertelen letöltés
-            alert("Sikertelen letöltés.")
-            let error = document.getElementById('content')
-            error.innerHTML = "<div><h2>Sikertelen adatlekérés...</h2><p>Az adatokat nem sikerült lekérni. Nézz utána, hogy jó IP címet adtál e meg és hogy rendesen működik az internetkapcsolat!</p></div>";
+            let LoadError = document.getElementById('content');
+            LoadError.innerHTML = "<div><h2>Sikertelen adatlekérés...</h2><p>Az adatokat nem sikerült lekérni. Nézz utána, hogy jó IP címet adtál e meg és hogy rendesen működik az internetkapcsolat!</p></div>"
         })
+
 }
 
 function soldOut() {
-    for (let cucc of készlet.megmaradt) {
-        if (cucc[2] > 0) {
+    for ( let cucc of készlet.megmaradt ) {
+        if (cucc[2] > 0 ) {
             return false;
         } else {
             continue;
@@ -48,7 +47,7 @@ function soldOut() {
 function GiveData() {
     fetch(`http://${IP}:5555/keszlet.json`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(készlet)
     })
         .then(() => {
@@ -68,7 +67,7 @@ function load() {
     let tételek = "";
     for (let i = 0; i < készlet.árlista.length; i++) {
         if (készlet.megmaradt[i][2] > 0) {
-            tételek += '<li><label for="ck_' + (i + 1) + '">' + készlet.árlista[i][0] + ' (' + készlet.árlista[i][1] + ' Ft/db, ' + készlet.megmaradt[i][2] + ' db maradt)</label><input class="measure" type="number" id="ck_' + (i + 1) + '" value="0"><br><label class="errs" id="E-' + (i + 1) + '">Nem adhatsz meg nagyobb összeget, mint ' + készlet.megmaradt[i][2] + ', sem kissebbet, mint 0.</label></li>';
+            tételek += '<li><label for="ck_' + (i + 1) + '">' + készlet.árlista[i][0] + ' ('+ készlet.árlista[i][1] +' Ft/db, ' + készlet.megmaradt[i][2] + ' db maradt)</label><input class="measure" type="number" id="ck_' + (i + 1) + '" value="0"><br><label class="errs" id="E-'+ (i + 1) +'">Nem adhatsz meg nagyobb összeget, mint '+ készlet.megmaradt[i][2] +', sem kissebbet, mint 0.</label></li>';
         }
     }
     cuccok.innerHTML = tételek;
@@ -78,20 +77,20 @@ function load() {
 
 //  Összekészített áruk értékének összegzése
 function add_prices() {
-    vetel = { cuccok: [], összeg: 0 };
+    vetel = {cuccok: [], összeg: 0};
     let minden = 0;                                              //Végösszeg értéke 
     let nonull = true;
     let parts = [];
     let reszosszeg;
     for (let i = 1; i <= készlet.megmaradt.length; i++) {
         let inp = document.getElementById("ck_" + i.toString()); //Össz érték termék szerint
-        let Err = document.getElementById("E-" + (i));
+        let Err = document.getElementById("E-"+ (i));
         let tmp = [];
         if (inp === null) {
             continue;
         }
         if (inp.value == "") {
-            inp.value = 0;
+	    inp.value = 0;
         }
         if (készlet.megmaradt[i - 1][2] >= inp.valueAsNumber && inp.valueAsNumber >= 0) {
             reszosszeg = inp.valueAsNumber * készlet.megmaradt[i - 1][1];
@@ -101,7 +100,7 @@ function add_prices() {
                 parts.push(false);
                 tmp = [készlet.megmaradt[i - 1][0], készlet.megmaradt[i - 1][1], inp.valueAsNumber];
                 vetel.cuccok.push(tmp);
-                vetel.összeg += reszosszeg;
+                vetel.összeg += reszosszeg; 
             }
         } else {
             Err.style.display = "block";
