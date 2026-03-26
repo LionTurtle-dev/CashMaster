@@ -4,6 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     margin  : 0;
+    width: 110%;
 }
 
 h1 {
@@ -90,6 +91,10 @@ li {
     align-items: center;
 }
 
+.cks {
+    padding: 0;
+}
+
 #buy {
     display: none;
 }
@@ -102,7 +107,40 @@ li {
     margin-left: 10px;
 }
 
-#cuccok {
+#aloldal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+aside {
+    min-width: 200px;
+    min-height: fit-content;
+    margin-top: 5%;
+}
+
+.nopad {
     padding: 0;
 }
 
+.main-liner {
+    color: wheat;
+    text-align: center;
+    text-decoration: none;
+}
+
+#changing {
+    flex: 1;
+    margin-left: 0px;
+    padding-right: 15%;
+    padding-left: 15%;
+}
+
+.fonts {
+    font-size: 120%;
+}
+
+ul {
+    padding: 0;
+}
